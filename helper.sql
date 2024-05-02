@@ -2,13 +2,8 @@ create or replace view testers_and_ratings as
 select t.given, r.beer, r.score 
 from taster t join ratings r on (t.id = r.taster);
 
-create or replace view brewers_and_ratings as
-
-create or replace view beers_and_ratings as
-
-
-
-
+-- create or replace view brewers_and_ratings as
+-- create or replace view beers_and_ratings as
 
 create or replace function avgTaster(testerName text) returns text
 as $$ 
@@ -17,12 +12,13 @@ declare
     count       integer;
     _exists     boolean;
     out         text;
+    average     text;
     r           record;
 begin
     select exists (select 1 from taster where given = testerName) into _exists; 
     
     if not _exists then
-        out := "No taster called '%'", testerName; 
+        out := 'No taster called ' || "'" || testerName || "'";
         return out;
     end if;
 
@@ -35,7 +31,9 @@ begin
         sum := sum + r.score;
     end loop;
     
-    out := 'Average rating for taster % is %', testerName, 1.0*sum/count;
+    average := to_char(1.0 * sum / count, '9.9');
+
+    out := 'Average rating for taster ' || testerName || ' is ' || average;
     return out;
 end;
 $$ language plpgsql;
