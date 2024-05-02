@@ -16,7 +16,7 @@ def main(argv):
         print("Usage: ./avgrat taster|beer|brewer Name")
         return
 
-    con = pg.connect("dbname=beer")
+    con = pg.connect("dbname=beers")
     cur = con.cursor()
 
     if category == 'taster':
