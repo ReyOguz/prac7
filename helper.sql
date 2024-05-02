@@ -119,6 +119,11 @@ begin
         count := count + 1;
         sum := sum + r.score;
     end loop;
+
+    if count = 0 then
+        return 'No ratings for ' || $1;
+    end if;
+
     avg = 1.0 * sum/count;
     return 'Average rating for brewer ' || $1 || ' is ' || to_char(avg, '9.9');
 end;
