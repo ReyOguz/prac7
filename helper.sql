@@ -33,7 +33,7 @@ begin
     
     average := to_char(1.0 * sum / count, '9.9');
 
-    out := 'Average rating for taster ' || testerName || ' is ' || average;
+    out := 'Average rating for taster ' || testerName || ' is' || average;
     return out;
 end;
 $$ language plpgsql;
