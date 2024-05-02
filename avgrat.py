@@ -12,7 +12,7 @@ def main(argv):
     category = str(argv[1])
     name = str(argv[2])
 
-    if category != 'taster' or category != 'beer' or category != 'brewer':
+    if (category != 'taster') or (category != 'beer') or (category != 'brewer'):
         print("Usage: ./avgrat taster|beer|brewer Name")
         return
 
