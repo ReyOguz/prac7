@@ -21,15 +21,13 @@ def main(argv):
 
     if category == 'taster':
         cur.execute('select * from avgTaster(%s)',[name])
-        print(cur.fetchone()[0])
-        
+        print(cur.fetchone()[0])    
     elif category == 'beer':
         cur.execute("select * from avgBeer(%s)", [name])
         print(cur.fetchone()[0])        
     else:
-        # category = brewer
-        print("something")
-    
+        cur.execute("select * from avgBrewer(%s)", [name])
+        print(cur.fetchone()[0])
     con.close()
     return
 

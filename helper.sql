@@ -5,7 +5,14 @@ from taster t join ratings r on (t.id = r.taster);
 create or replace view beers_and_ratings as
 select r.beer, r.score 
 from taster t join ratings r on (t.id = r.taster);
--- create or replace view brewers_and_ratings as
+
+create or replace view brewers_and_ratings as
+select r.beer as "Beer Id", b1.name as "Beer Name", b2.id as "Brewer ID", r.score 
+from taster t 
+join ratings r on (t.id = r.taster)
+join beer b1 on (r.beer = b1.id)
+join brewer b2 on (b1.brewer = b2.id)
+;
 
 -- create or replace function avgTaster(testerName text) returns text
 -- as $$ 
@@ -40,6 +47,38 @@ from taster t join ratings r on (t.id = r.taster);
 -- end;
 -- $$ language plpgsql;
 
+-- create or replace function avgBeer(Bname text) returns text
+-- as $$ 
+-- declare
+--     count       integer := 0;
+--     sum         integer := 0;
+--     _exists     boolean;
+--     avg         float;
+--     r           record;
+--     beerId      int;
+-- begin
+
+--     select exists ( select 1 from beer where name = $1) into _exists;
+    
+--     if not _exists then
+--         return 'No beer called ' || "'" || bname || "'";
+--     end if;
+
+--     select id from beer where name = Bname into beerId;
+
+    
+--     for r in select * from beers_and_ratings where beer = beerId
+--     loop
+--         count := count + 1;
+--         sum = sum + r.score;
+--     end loop;
+
+--     avg = 1.0 * sum / count;
+
+--     return 'Average rating for ' || $1 || ' is' || to_char(avg, '9.9') ;
+
+-- end;
+-- $$ language plpgsql;
 
 
 
@@ -50,55 +89,38 @@ from taster t join ratings r on (t.id = r.taster);
 
 
 
-create or replace function avgBeer(Bname text) returns text
+
+
+
+
+
+
+create or replace function avgBrewer(bName text) returns text
 as $$ 
-declare
-    count       integer := 0;
+declare 
     sum         integer := 0;
-    _exists     boolean;
+    count       integer := 0;
     avg         float;
     r           record;
-    beerId      int;
+    _exists     boolean;
+    brewerId    int;
 begin
 
-    select exists ( select 1 from beer where name = $1) into _exists;
-    
-    if not exists then
-        return 'No beer called ' || "'" || bname || "'";
+    select exists( select 1 from brewer where name = $1) into _exists;
+
+    if not _exists then
+        return 'No ratings for ' || $1;
     end if;
 
-    select id from beer where name = Bname into beerId;
+    select id from brewer where name = $1 into brewerId;
 
-    
-    for r in select * from beers_and_ratings where beer = beerId
+    for r in select * from brewers_and_ratings where "Brewer ID" = brewerId
     loop
         count := count + 1;
-        sum = sum + r.score;
+        sum := sum + r.score;
     end loop;
+    avg = 1.0 * sum/count;
 
-    avg = 1.0 * sum / count;
-
-    return 'Average rating for ' || $1 || ' is' || to_char(avg, '9.9') ;
-
+    return 'Average rating for brewer ' || $1 || ' is ' || to_char(avg);
 end;
-$$ language plpgsql;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-create or replace function avgBrewer() returns text
-as $$ 
-
 $$ language plpgsql;
