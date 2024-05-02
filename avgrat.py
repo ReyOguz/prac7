@@ -11,6 +11,9 @@ def main(argv):
 
     category = argv[1]
     name = argv[2]
+    print(argv[0], argv[1], argv[2])
+
+    return
 
     if category != 'taster' or category != 'beer' or category != 'brewer':
         print("Usage: ./avgrat taster|beer|brewer Name")
