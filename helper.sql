@@ -106,13 +106,13 @@ declare
     brewerId    int;
 begin
 
-    select exists( select 1 from brewer where name = $1) into _exists;
+    select exists( select 1 from brewer where name = bName) into _exists;
 
     if not _exists then
         return 'No ratings for ' || $1;
     end if;
 
-    select id from brewer where name = $1 into brewerId;
+    select id from brewer where name = bName into brewerId;
 
     select exists (select 1 from brewers_and_ratings where "Brewer ID" = brewerId) into _exists;
     
@@ -130,7 +130,7 @@ begin
         return 'No ratings for ' || $1;
     end if;
 
-    avg = 1.0 * sum/count;
+    avg = 1.0 * sum / count;
     return 'Average rating for brewer ' || $1 || ' is ' || to_char(avg, '9.9');
 end;
 $$ language plpgsql;
