@@ -11,7 +11,7 @@ def main(argv):
 
     category = argv[1]
     name = argv[2]
-    print(argv[0], argv[1], argv[2])
+    print(str(argv[0]), str(argv[1]), str(argv[2]))
 
     return
 
