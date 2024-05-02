@@ -114,13 +114,19 @@ begin
 
     select id from brewer where name = $1 into brewerId;
 
+    select exists (select 1 from brewers_and_ratings where "Brewer ID" = brewerId) into _exists;
+    
+    if not _exists then
+        return 'No ratings for ' || $1;
+    end if;
+
     for r in select * from brewers_and_ratings where "Brewer ID" = brewerId
     loop
         count := count + 1;
         sum := sum + r.score;
     end loop;
 
-    if count = 0 then
+    if sum = 0 then
         return 'No ratings for ' || $1;
     end if;
 
