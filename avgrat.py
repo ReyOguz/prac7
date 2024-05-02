@@ -9,11 +9,8 @@ def main(argv):
         print("Usage: ./avgrat taster|beer|brewer Name")
         return
 
-    category = argv[1]
-    name = argv[2]
-    print(str(argv[0]), str(argv[1]), str(argv[2]))
-
-    return
+    category = str(argv[1])
+    name = str(argv[2])
 
     if category != 'taster' or category != 'beer' or category != 'brewer':
         print("Usage: ./avgrat taster|beer|brewer Name")
