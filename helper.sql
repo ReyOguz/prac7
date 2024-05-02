@@ -120,7 +120,6 @@ begin
         sum := sum + r.score;
     end loop;
     avg = 1.0 * sum/count;
-
-    return 'Average rating for brewer ' || $1 || ' is ' || to_char(avg);
+    return 'Average rating for brewer ' || $1 || ' is ' || to_char(avg, '9.9');
 end;
 $$ language plpgsql;
