@@ -5,11 +5,12 @@ import psycopg2 as pg
 
 
 def main(argv):
-    print(len(argv))
-    return
+    print('first')
     if len(argv) != 3:
         print("Usage: ./avgrat taster|beer|brewer Name")
         return
+    
+    print('second')
 
     category = str(argv[1])
     name = str(argv[2])
@@ -17,6 +18,8 @@ def main(argv):
     if (category != 'taster') or (category != 'beer') or (category != 'brewer'):
         print("Usage: ./avgrat taster|beer|brewer Name")
         return
+    
+    print('third')
 
     con = pg.connect("dbname=beer")
     cur = con.cursor()
