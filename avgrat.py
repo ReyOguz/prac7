@@ -5,6 +5,8 @@ import psycopg2 as pg
 
 
 def main(argv):
+    print(len(argv))
+    return
     if len(argv) != 3:
         print("Usage: ./avgrat taster|beer|brewer Name")
         return
