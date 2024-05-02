@@ -20,7 +20,7 @@ def main(argv):
     cur = con.cursor()
 
     if category == 'taster':
-        print(cur.execute('select from avgTaster(%s)',[name]))
+        print(cur.execute('select * from avgTaster(%s)',[name]))
         print(cur.fetchone())
         return 
     # elif category == 'beer':
