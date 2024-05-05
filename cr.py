@@ -27,6 +27,7 @@ def main():
         join students s2 on c1.student = s2.id
         join people p on s2.id = p.id
         where s.code = %s and t.code = %s
+        order by p.family, p.given
         ''', [subj, term])
     
     list = cur.fetchall()
