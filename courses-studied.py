@@ -22,7 +22,7 @@ def main():
         print('No such student')
     else:
         cur.execute('''
-            from course_enrolments c1
+            select s.code, s.longname from course_enrolments c1
             join courses c2 on (c1.course = c2.id)
             join subjects s on (c2.subject = s.id)
             join terms t on (c2.term = t.id)
