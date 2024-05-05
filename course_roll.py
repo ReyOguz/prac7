@@ -22,7 +22,7 @@ def main():
         conn.close()
         return
     
-    cur.execute("select id from subjects where code = %s)", [subj])
+    cur.execute("select id from subjects where code = %s", [subj])
     subj_id = cur.fetchone()[0]
     
     cur.execute('select exists (select 1 from terms where code = %s)', [term])
