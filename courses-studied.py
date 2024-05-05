@@ -6,8 +6,9 @@ import psycopg2 as pg2
 def main():
     if len(sys.argv) < 3:
         print('Usage: ./courses-studied studentID term')
+        print('\n')
         return
-
+    
     stuId = str(sys.argv[1])
     term = str(sys.argv[2])
 
