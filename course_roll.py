@@ -46,8 +46,7 @@ def main():
     cur.execute('select id from courses where subject = %s and term = %s', [subj_id, term_id])
     course_id = cur.fetchone()[0]
 
-
-    cur.execute('select longname from subjects where id = %s'[subj_id])
+    cur.execute('select longname from subjects where id = %s',[subj_id])
     print(f'{subj} {term} {cur.fetchone()[0]}')
 
     cur.execute('''
