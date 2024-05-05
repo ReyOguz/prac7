@@ -30,9 +30,14 @@ def main():
         ''', [subj, term])
     
     list = cur.fetchall()
-    
-    for t in list:
-        print(f'{t[0]} {t[1]}, {t[2]}')
+
+    print(f'{subj} {term}')
+
+    if len(list) == 0:
+        print('No students')
+    else: 
+        for t in list:
+            print(f'{t[0]} {t[1]}, {t[2]}')
     
     print('\n')
     con.close()
