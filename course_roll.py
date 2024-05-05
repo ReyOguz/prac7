@@ -3,7 +3,7 @@ import psycopg2 as pg
 
 def main():
 
-    if len(sys.argv) < 3:
+    if len(sys.argv) != 3:
         print ('Usage: course-roll subject term')
         print('\n')
         conn.close()
