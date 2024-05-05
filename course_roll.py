@@ -6,7 +6,6 @@ def main():
     if len(sys.argv) != 3:
         print ('Usage: course-roll subject term')
         print('\n')
-        conn.close()
         return
 
     subj = sys.argv[1]
