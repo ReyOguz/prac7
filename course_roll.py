@@ -66,3 +66,5 @@ def main():
     conn.close()
     return
     
+
+main()
