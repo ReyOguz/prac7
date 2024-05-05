@@ -32,7 +32,7 @@ def main():
         conn.close()
         return
     
-    cur.execute('select id from terms where code = %s)', [term])
+    cur.execute('select id from terms where code = %s', [term])
     term_id = cur.fetchone()[0]
 
     cur.execute('select exists (select 1 from courses where subject = %s and term = %s)', [subj_id, term_id])
@@ -43,7 +43,7 @@ def main():
         conn.close()
         return
     
-    cur.execute('select if from courses where subject = %s and term = %s)', [subj_id, term_id])
+    cur.execute('select id from courses where subject = %s and term = %s', [subj_id, term_id])
     course_id = cur.fetchone()[0]
 
 
