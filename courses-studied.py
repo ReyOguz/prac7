@@ -31,7 +31,7 @@ def main():
         list = cur.fetchall()
         for t in list:
             print(f'{t[0]} {t[1]}')
-
+    print('\n')
     con.close()
     return
         
